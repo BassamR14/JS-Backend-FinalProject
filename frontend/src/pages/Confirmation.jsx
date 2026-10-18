@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchData } from "../lib/api";
 import ReservationInformation from "../components/ReservationInformation";
+import { Navigation } from "../components/Navigation";
 
 export default function Confirmation() {
   const { id } = useParams();
@@ -26,9 +27,15 @@ export default function Confirmation() {
 
   return (
     <>
-      {loading && <p>Loading...</p>}
-      {error && <p>Could not get reservation information: {error} </p>}
-      {booking && <ReservationInformation info={booking} />}
+      <header>
+        <Navigation />
+      </header>
+
+      <main>
+        {loading && <p>Loading...</p>}
+        {error && <p>Could not get reservation information: {error} </p>}
+        {booking && <ReservationInformation info={booking} />}
+      </main>
     </>
   );
 }
