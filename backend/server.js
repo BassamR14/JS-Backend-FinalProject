@@ -48,7 +48,7 @@ app.post("/reservations", async (req, res) => {
       check_in,
       check_out,
     );
-    res.json({ data: ` New Reservation created with id: ${data}` });
+    res.json({ id: data, data: ` New Reservation created with id: ${data}` });
   } catch (error) {
     console.log(`Something went wrong: ${error}`);
     res.status(500).json({ message: "Something went wrong" });

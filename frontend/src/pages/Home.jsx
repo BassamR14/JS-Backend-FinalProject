@@ -2,10 +2,12 @@ import { useState } from "react";
 import Navigation from "../components/Navigation";
 import ReservationForm from "../components/ReservationForm";
 import { fetchData } from "../lib/api";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   async function createBooking(
     roomType,
@@ -18,7 +20,7 @@ export default function Home() {
     setMessage("");
 
     try {
-      await fetchData("reservations", "POST", {
+      const res = await fetchData("reservations", "POST", {
         room_type: roomType,
         guest_name: guestName,
         guest_email: guestEmail,
@@ -27,6 +29,8 @@ export default function Home() {
       });
 
       setMessage("Your room has been booked.");
+
+      navigate(`/confirmation/${res.id}`);
     } catch (error) {
       setError(error.message);
     }
