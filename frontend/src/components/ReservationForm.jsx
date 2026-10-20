@@ -1,21 +1,35 @@
 import { useState } from "react";
 
-export default function ReservationForm({ onSubmitReservation }) {
-  const [roomType, setRoomType] = useState("");
-  const [guestName, setGuestName] = useState("");
-  const [guestEmail, setGuestEmail] = useState("");
-  const [checkInDate, setCheckInDate] = useState("");
-  const [checkOutDate, setCheckOutDate] = useState("");
+export default function ReservationForm({
+  onSubmitReservation,
+  initialValues = {},
+  submitLabel = "Book a Room",
+  onCancel,
+}) {
+  const [roomType, setRoomType] = useState(initialValues.roomType ?? "");
+  const [guestName, setGuestName] = useState(initialValues.guestName ?? "");
+  const [guestEmail, setGuestEmail] = useState(initialValues.guestEmail ?? "");
+  const [guestNumber, setGuestNumber] = useState(
+    initialValues.guestNumber ?? "",
+  );
+  const [checkInDate, setCheckInDate] = useState(
+    initialValues.checkInDate ?? "",
+  );
+  const [checkOutDate, setCheckOutDate] = useState(
+    initialValues.checkOutDate ?? "",
+  );
 
   function handleSubmit(e) {
     e.preventDefault();
     const trimmedName = guestName.trim();
     const trimmedEmail = guestEmail.trim();
+    const trimmedNumber = guestNumber.trim();
 
     onSubmitReservation(
       roomType,
       trimmedName,
       trimmedEmail,
+      trimmedNumber,
       checkInDate,
       checkOutDate,
     );
@@ -52,7 +66,6 @@ export default function ReservationForm({ onSubmitReservation }) {
             Double
           </label>
         </fieldset>
-
         <label>
           Name:
           <input
@@ -63,7 +76,6 @@ export default function ReservationForm({ onSubmitReservation }) {
             required
           />
         </label>
-
         <label>
           Email:
           <input
@@ -74,18 +86,29 @@ export default function ReservationForm({ onSubmitReservation }) {
             required
           />
         </label>
-
+        <label>
+          Mobile Number:
+          <input
+            type="tel"
+            placeholder="Enter Your Mobile Number"
+            value={guestNumber}
+            onChange={(e) => setGuestNumber(e.target.value)}
+            autoComplete="tel"
+            pattern="[0-9+\s\-]{7,15}"
+            title="Enter a valid phone number: 7-15 characters: digits, spaces, + and -"
+            required
+          />
+        </label>
         <label>
           Check-in Date:
           <input
             type="date"
             value={checkInDate}
             onChange={(e) => setCheckInDate(e.target.value)}
-            min={today}
+            min={initialValues.checkInDate ? undefined : today}
             required
           />
         </label>
-
         <label>
           Check-out Date:
           <input
@@ -96,8 +119,12 @@ export default function ReservationForm({ onSubmitReservation }) {
             required
           />
         </label>
-
-        <button type="submit">Book a Room</button>
+        <button type="submit">{submitLabel}</button>
+        {onCancel && (
+          <button type="button" onClick={onCancel}>
+            Cancel
+          </button>
+        )}{" "}
       </form>
     </div>
   );

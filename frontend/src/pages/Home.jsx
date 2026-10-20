@@ -13,6 +13,7 @@ export default function Home() {
     roomType,
     guestName,
     guestEmail,
+    guestNumber,
     checkInDate,
     checkOutDate,
   ) {
@@ -24,6 +25,7 @@ export default function Home() {
         room_type: roomType,
         guest_name: guestName,
         guest_email: guestEmail,
+        guest_number: guestNumber,
         check_in: checkInDate,
         check_out: checkOutDate,
       });

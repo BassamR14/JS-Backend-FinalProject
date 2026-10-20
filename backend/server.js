@@ -39,12 +39,20 @@ app.get("/reservations/:id", async (req, res) => {
 });
 
 app.post("/reservations", async (req, res) => {
-  const { room_type, guest_name, guest_email, check_in, check_out } = req.body;
+  const {
+    room_type,
+    guest_name,
+    guest_email,
+    guest_number,
+    check_in,
+    check_out,
+  } = req.body;
   try {
     const data = await createReservation(
       room_type,
       guest_name,
       guest_email,
+      guest_number,
       check_in,
       check_out,
     );
@@ -57,13 +65,21 @@ app.post("/reservations", async (req, res) => {
 
 app.put("/reservations/:id", async (req, res) => {
   const id = Number(req.params.id);
-  const { room_type, guest_name, guest_email, check_in, check_out } = req.body;
+  const {
+    room_type,
+    guest_name,
+    guest_email,
+    guest_number,
+    check_in,
+    check_out,
+  } = req.body;
   try {
     const changes = await updateReservation(
       id,
       room_type,
       guest_name,
       guest_email,
+      guest_number,
       check_in,
       check_out,
     );

@@ -14,6 +14,7 @@ async function connectDatabase() {
         room_type TEXT NOT NULL CHECK (room_type IN ('single', 'double')),
         guest_name TEXT NOT NULL,
         guest_email TEXT NOT NULL,
+        guest_number TEXT NOT NULL,
         check_in TEXT NOT NULL,
         check_out TEXT NOT NULL,
         CHECK (check_out > check_in)

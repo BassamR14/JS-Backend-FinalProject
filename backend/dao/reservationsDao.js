@@ -16,15 +16,17 @@ async function createReservation(
   room_type,
   guest_name,
   guest_email,
+  guest_number,
   check_in,
   check_out,
 ) {
   const db = await database;
   const data = await db.run(
-    "INSERT INTO reservations (room_type, guest_name, guest_email, check_in, check_out) VALUES (?,?,?,?,?) ",
+    "INSERT INTO reservations (room_type, guest_name, guest_email, guest_number, check_in, check_out) VALUES (?,?,?,?,?,?) ",
     room_type,
     guest_name,
     guest_email,
+    guest_number,
     check_in,
     check_out,
   );
@@ -36,17 +38,19 @@ async function updateReservation(
   room_type,
   guest_name,
   guest_email,
+  guest_number,
   check_in,
   check_out,
 ) {
   const db = await database;
   const data = await db.run(
     `UPDATE reservations
-     SET room_type = ?, guest_name = ?, guest_email = ?, check_in = ?, check_out = ?
+     SET room_type = ?, guest_name = ?, guest_email = ?, guest_number=?, check_in = ?, check_out = ?
      WHERE id = ?`,
     room_type,
     guest_name,
     guest_email,
+    guest_number,
     check_in,
     check_out,
     id,
