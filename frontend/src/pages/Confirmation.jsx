@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchData } from "../lib/api";
 import ReservationInformation from "../components/ReservationInformation";
-import { Navigation } from "../components/Navigation";
+import Navigation from "../components/Navigation";
 
 export default function Confirmation() {
   const { id } = useParams();
