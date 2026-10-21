@@ -17,8 +17,12 @@ export default function TableRow({
       <td> {checkIn} </td>
       <td> {checkOut} </td>
       <td>
-        <button onClick={updateBooking}>Update</button>
-        <button onClick={deleteBooking}>Delete</button>
+        <div className="row-actions">
+          <button onClick={updateBooking}>Update</button>
+          <button className="danger" onClick={deleteBooking}>
+            Delete
+          </button>
+        </div>
       </td>
     </tr>
   );

@@ -27,11 +27,9 @@ export default function Confirmation() {
 
   return (
     <>
-      <header>
-        <Navigation />
-      </header>
+      <Navigation />
 
-      <main>
+      <main className="confirmation">
         {loading && <p>Loading...</p>}
         {error && <p>Could not get reservation information: {error} </p>}
         {booking && <ReservationInformation info={booking} />}

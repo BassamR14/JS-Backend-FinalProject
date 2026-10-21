@@ -69,49 +69,49 @@ export default function Admin() {
 
   return (
     <>
-      <header>
-        <Navigation />
-      </header>
+      <Navigation />
 
-      <main>
+      <main className="admin">
         {loading && <p>Loading...</p>}
         {error && <p>Could not get reservation information: {error} </p>}
 
-        <table>
-          <thead>
-            <tr>
-              <th>Room Type</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Mobile</th>
-              <th>Check-in Date</th>
-              <th>Check-out Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+        <div className="table-wrapper">
+          <table className="reservations-table">
+            <thead>
+              <tr>
+                <th>Room Type</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {bookings &&
-              bookings.map((booking) => (
-                <TableRow
-                  key={booking.id}
-                  room={booking.room_type}
-                  name={booking.guest_name}
-                  email={booking.guest_email}
-                  mobile={booking.guest_number}
-                  checkIn={booking.check_in}
-                  checkOut={booking.check_out}
-                  updateBooking={() => {
-                    setError("");
-                    setEditBooking(booking);
-                  }}
-                  deleteBooking={() => {
-                    deleteReservation(booking.id);
-                  }}
-                />
-              ))}
-          </tbody>
-        </table>
+            <tbody>
+              {bookings &&
+                bookings.map((booking) => (
+                  <TableRow
+                    key={booking.id}
+                    room={booking.room_type}
+                    name={booking.guest_name}
+                    email={booking.guest_email}
+                    mobile={booking.guest_number}
+                    checkIn={booking.check_in}
+                    checkOut={booking.check_out}
+                    updateBooking={() => {
+                      setError("");
+                      setEditBooking(booking);
+                    }}
+                    deleteBooking={() => {
+                      deleteReservation(booking.id);
+                    }}
+                  />
+                ))}
+            </tbody>
+          </table>
+        </div>
 
         {editBooking && (
           <Modal onClose={() => setEditBooking(null)}>

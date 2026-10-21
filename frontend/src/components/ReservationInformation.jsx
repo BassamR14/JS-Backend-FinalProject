@@ -1,17 +1,30 @@
 export default function ReservationInformation({ info }) {
   return (
-    <div>
+    <div className="reservation-info">
       <h2>Your room has been booked.</h2>
-      <p>Room type: {info.room_type} </p>
-      <section>
-        <p>Name: {info.guest_name} </p>
-        <p> Email: {info.guest_email} </p>
-        <p>Mobile: {info.guest_number} </p>
-      </section>
-      <section>
-        <p>Check-in Date: {info.check_in} </p>
-        <p>Check-out Date: {info.check_out} </p>
-      </section>
+
+      <dl>
+        <dt>Booking number</dt>
+        <dd>{info.id}</dd>
+
+        <dt>Room type</dt>
+        <dd>{info.room_type}</dd>
+
+        <dt>Name</dt>
+        <dd>{info.guest_name}</dd>
+
+        <dt>Email</dt>
+        <dd>{info.guest_email}</dd>
+
+        <dt>Mobile</dt>
+        <dd>{info.guest_number}</dd>
+
+        <dt>Check-in</dt>
+        <dd>{info.check_in}</dd>
+
+        <dt>Check-out</dt>
+        <dd>{info.check_out}</dd>
+      </dl>
     </div>
   );
 }

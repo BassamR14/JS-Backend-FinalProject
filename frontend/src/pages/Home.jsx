@@ -3,6 +3,7 @@ import Navigation from "../components/Navigation";
 import ReservationForm from "../components/ReservationForm";
 import { fetchData } from "../lib/api";
 import { useNavigate } from "react-router-dom";
+import heroImage from "../assets/crow-sentinel.webp";
 
 export default function Home() {
   const [error, setError] = useState("");
@@ -40,12 +41,12 @@ export default function Home() {
 
   return (
     <>
-      <header>
-        <Navigation />
-      </header>
+      <Navigation />
 
       <main>
-        <div>
+        <div
+          className="booking"
+          style={{ backgroundImage: `url(${heroImage})` }}>
           <ReservationForm onSubmitReservation={createBooking} />
           {error && <p>Something went wrong : {error}</p>}
           {message && <p>{message}</p>}

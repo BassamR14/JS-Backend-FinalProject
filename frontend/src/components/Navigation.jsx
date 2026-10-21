@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Navigation() {
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
-    </nav>
+    <header>
+      <nav>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/about">About</NavLink>
+      </nav>
+      <h1>The Crooked Raven</h1>
+    </header>
   );
 }
