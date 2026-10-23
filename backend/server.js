@@ -14,16 +14,18 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Server is Running");
+  res.status(200).send("Server is Running");
 });
 
 app.get("/reservations", async (req, res) => {
   try {
     const data = await getReservations();
-    res.json(data);
+    res.status(200).json(data);
   } catch (error) {
     console.log(`Something went wrong: ${error}`);
-    res.status(500).json({ message: "Something went wrong" });
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 });
 
@@ -31,10 +33,12 @@ app.get("/reservations/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
     const data = await getReservation(id);
-    res.json(data);
+    res.status(200).json(data);
   } catch (error) {
     console.log(`Something went wrong: ${error}`);
-    res.status(500).json({ message: "Something went wrong" });
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 });
 
@@ -56,10 +60,14 @@ app.post("/reservations", async (req, res) => {
       check_in,
       check_out,
     );
-    res.json({ id: data, data: ` New Reservation created with id: ${data}` });
+    res
+      .status(200)
+      .json({ id: data, data: ` New Reservation created with id: ${data}` });
   } catch (error) {
     console.log(`Something went wrong: ${error}`);
-    res.status(500).json({ message: "Something went wrong" });
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 });
 
@@ -85,11 +93,15 @@ app.put("/reservations/:id", async (req, res) => {
     );
 
     changes
-      ? res.json({ message: `Reservation ${id} has been updated` })
-      : res.json({ message: `Reservation ${id} has not been updated` });
+      ? res.status(200).json({ message: `Reservation ${id} has been updated` })
+      : res
+          .status(200)
+          .json({ message: `Reservation ${id} has not been updated` });
   } catch (error) {
     console.log(`Something went wrong: ${error}`);
-    res.status(500).json({ message: "Something went wrong" });
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 });
 
@@ -100,11 +112,15 @@ app.delete("/reservations/:id", async (req, res) => {
     const changes = await deleteReservation(id);
 
     changes
-      ? res.json({ message: `Reservation ${id} has been deleted` })
-      : res.json({ message: `Reservation ${id} has not been deleted` });
+      ? res.status(200).json({ message: `Reservation ${id} has been deleted` })
+      : res
+          .status(200)
+          .json({ message: `Reservation ${id} has not been deleted` });
   } catch (error) {
     console.log(`Something went wrong: ${error}`);
-    res.status(500).json({ message: "Something went wrong" });
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 });
 
